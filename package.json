@@ -1,0 +1,22 @@
+{
+  "name"         : "hr_online_to_slack",
+  "version"      : "1.0.0",
+  "description"  : "Get Hols from HROnline and post them to Slack",
+  "main"         : "getHols.js",
+  "author"       : {
+    "name"       : "Kevin Hughes",
+    "email"      : "kevtufc@gmail.com"
+  },
+  "license"      : "GPL-3.0",
+  "repository"   : {
+    "type"       : "git",
+    "url"        : "https://github.com/kevtufc/HrOnlineToSlack.git"
+  },
+  "dependencies" : {
+    "request"    : "latest",
+    "cheerio"    : "latest",
+    "moment"     : "latest",
+    "node-slack" : "latest",
+    "compound-subject" : "latest"
+  }
+}
