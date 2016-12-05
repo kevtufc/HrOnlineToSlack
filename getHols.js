@@ -6,15 +6,16 @@
 // Put it in a crontab for maximum usefulness.
 //
 
-slack_webhook_url = ''   # Put a slack webhook URL in here
-slack_channel = ''       # The channel you want it to post notices to
-hr_online_username = ''  # Username of a user who can see all the users in HR Online
-hr_online_password = ''  # And their password
+slack_webhook_url = ''   // Put a slack webhook URL in here
+slack_channel = ''       // The channel you want it to post notices to
+hr_online_username = ''  // Username of a user who can see all the users in HR Online
+hr_online_password = ''  // And their password
 
-const people = {
-  Name1  : 123123,     # A list of people who you want to checked for upcoming holidays
-  Name2  : 321321,     # The name can be whatever, the number is the EmployeeID seen in the URL on their page
+const people2 = {
+  name1  : 123123,     // A list of people who you want to checked for upcoming holidays
+  name2  : 321321,     // The name can be whatever, the number is the EmployeeID seen in the URL on their page
 }
+
 
 var request = require('request');
 var request = request.defaults({jar: true});
@@ -65,6 +66,7 @@ function getHols(person,employeeId){
             $('table tr').each(function(i,tr){
               var text = ""
               if($(this).find('td').length < 2){ return(true) }
+	      if($(this).find('td.icon_cell span[data-status=Approved]').length < 1){ return(true) }
               var from = moment($(this).find('td.date_cell').first().text().trim(),dateFormat)
               var to  =  moment($(this).find('td.date_cell').last().text().trim(),dateFormat)
               if(from.isAfter(moment().endOf('week').add(7,'days'))){ return(true) }
@@ -93,9 +95,9 @@ for(var person in people){
     slack.send({
       username: "Holiday Bot",
       icon_emoji: ":palm_tree:",
-      channel: "#" + slack_channel,
+      channel: slack_channel,
       text: a
     })
-    // console.log(a)
+    console.log(a)
   })
 }
